@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Todo App</title>
+     <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Todo List</h1>
+    <div>Add a new todo item:
+        <form action="{{ url_for('add') }}" method="POST">
+            <input type="text" name="todoitem">
+            <button type="submit" class="btn">Add!</button>
+        </form>
+    </div>
+    <div>
+        <h2>Incomplete Items</h2>
+        <ul>
+            {% for todo in incomplete %}
+            <li>{{ todo.text }} <a href="{{ url_for('complete', id=todo.id) }}">Mark As Complete</a></li>
+            {% endfor %}
+        </ul>
+
+        <h2>Completed Items</h2>
+        <ul>
+            {% for todo in complete %}
+            <li>{{ todo.text }}</li>
+            {% endfor %}
+        </ul>
+
+    </div>
+</body>
+</html>
